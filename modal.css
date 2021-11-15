@@ -527,3 +527,10 @@ footer {
   }
 }
 
+/* My code */
+
+.error{
+  color: #f00;
+  font-size: 1rem;
+}
+
