@@ -21,6 +21,8 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  
+ 
 }
 
 // ================== TODO : fermer la modale #1 ======================
@@ -35,8 +37,8 @@ function closeModal(){
 
 // ================== Implémenter entrées du formulaire #2 ============
 class field{
-  constructor(fieldId, regExp, errorText, error){
-    this.fieldId = fieldId;
+  constructor(fieldName, regExp, errorText, error){
+    this.fieldName = fieldName;
     this.regExp = regExp;
     this.errorText = errorText;
     this.error = error;
@@ -50,6 +52,7 @@ fieldsArr[1] = new field('last', /[a-z,A-Z]{2,}$/, 'Au moins 2 lettres', true);
 fieldsArr[3] = new field('email', /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u, 'Veuillez entrer un email valide', true);
 fieldsArr[4] = new field('quantity', /[0-9]$/, 'Entrez le numéro', true);
 fieldsArr[5] = new field('checkbox1', /[a-z]/, 'Champs requis', true);
+fieldsArr[6] = new field('location', /[a-z]/, 'Sélectionnez une ville', true);
 
 // delete all errorMessages
 function deleteErrorMessages(){
@@ -59,26 +62,37 @@ function deleteErrorMessages(){
     }
 }
 
+// verification for radio
+function isAnyRadioChecked(){
+  return document.querySelectorAll('input[type="radio"]:checked').length;
+}
+
+// create div with red error
+function createDivWithError(elem, errorText){
+  var newDiv = document.createElement("div");
+  newDiv.classList.add('error');
+  newDiv.innerHTML = errorText;
+  elem.parentElement.insertBefore(newDiv, elem.nextSibling);
+}
 
 // vérification du contenu du champ
 function isValid(field){
-  let elem = document.getElementById(field.fieldId);
-
-  if(!field.regExp.test(elem.value) || (field.fieldId === 'checkbox1' && !elem.checked)){
+  let elem = document.querySelector('input[name="'+ field.fieldName +'"]');
+  if(!field.regExp.test(elem.value)  // for 'normal' inputs
+      || (field.fieldName === 'checkbox1' && !elem.checked)   // for checkbox
+      || (field.fieldName === 'location' && isAnyRadioChecked() === 0)   // for radioboxes
+      ){
     field.error = true;
-    var newDiv = document.createElement("div");
-    newDiv.classList.add('error');
-    newDiv.innerHTML = field.errorText;
-    elem.parentElement.insertBefore(newDiv, elem.nextSibling);
+    createDivWithError(elem, field.errorText);
   }
   else{
     field.error = false;
   }
 }
 
-// vérification de chaque champ
+// vérification de chaque champ lors de la défocalisation
 fieldsArr.forEach(i => {
-  document.getElementById(i.fieldId).addEventListener('change', function(e){
+  document.querySelector('input[name="'+ i.fieldName +'"]').addEventListener('change', function(e){
     deleteErrorMessages();
     isValid(i);
   });
@@ -86,13 +100,13 @@ fieldsArr.forEach(i => {
 
 
 //  submit form
-
 document.querySelector('form').addEventListener('submit', function(e){
   e.preventDefault();
   deleteErrorMessages();
+
   let isError;
+
   fieldsArr.forEach(i => {
-    
     isValid(i);
     if(i.error === true){
       isError = true;
