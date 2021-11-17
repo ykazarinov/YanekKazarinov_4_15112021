@@ -11,22 +11,19 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const successMsg = document.querySelector('.success');
+const errorMsg = document.querySelector('.errorModal');
 
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-
-
 // launch modal form
 function launchModal() {
-  // modalbg.style.display = "block";
   openModal(modalbg);
-  
- 
 }
 
-// ================== Data pour test ==================================
+// ================== Remplir avec les données de test ==========================
 class testData{
   constructor(fieldName, data, type){
     this.fieldName = fieldName;
@@ -45,44 +42,55 @@ testDataArr[4] = new testData('quantity', 1, 'normal');
 testDataArr[5] = new testData('location', [true, 2], 'radio');
 testDataArr[6] = new testData('checkbox1', true, 'check');
 
-testDataArr.forEach(i => {
-  switch (i.type){ 
-    case 'normal' : 
-      document.querySelector('input[name = "'+ i.fieldName +'"]').value = i.data;
-      break;
-    case 'radio' : 
-      document.querySelector('input[name = "'+ i.fieldName +'"]:nth-of-type('+ i.data[1] +')').checked = i.data[0];
-      break;
-    case 'check' : 
-      document.querySelector('input[name = "'+ i.fieldName +'"]').checked = i.data;
-      break;
-  }
+document.querySelector('.fill').addEventListener('click', function(e){
+  testDataArr.forEach(i => {
+    switch (i.type){ 
+      case 'normal' : 
+        document.querySelector('input[name = "'+ i.fieldName +'"]').value = i.data;
+        break;
+      case 'radio' : 
+        document.querySelector('input[name = "'+ i.fieldName +'"]:nth-of-type('+ i.data[1] +')').checked = i.data[0];
+        break;
+      case 'check' : 
+        document.querySelector('input[name = "'+ i.fieldName +'"]').checked = i.data;
+        break;
+    }
+  });
+})
 
+// ================== clear the fields ================================
+
+function clearFields(){
+  document.querySelectorAll('.text-control').forEach(el=>el.value = '');
+  document.querySelectorAll('input[type="checkbox"]').forEach(el=>el.checked = '');
+  document.querySelector('input[type="checkbox"]:nth-child(1)').checked = 'true';
+  document.querySelectorAll('input[type="radio"]').forEach(el=>el.checked = '');
+}
+
+document.querySelector('.clear').addEventListener('click', function(e){
+  clearFields();
 });
-
 
 // ================== TODO : fermer la modale #1 ======================
 
-function openModal(elem){
+const openModal = elem => {
   elem.classList.remove('noDisplay');
   elem.classList.remove('modal_close');
   elem.classList.add('modal_open');
 }
 
-function closeModal(elem){
+const closeModal = elem => {
   elem.classList.add('modal_close');
   elem.classList.remove('modal_open');
-  // elem.classList.add('noDisplay');
 }
 
 document.addEventListener('click',e => {
-  
   if(e.target.classList.contains('close')){
-      // e.target.parentElement.parentElement.classList.add('modal_close');
-      // e.target.parentElement.parentElement.style.removeProperty('display');
       closeModal(e.target.parentElement.parentElement);
+      if(e.target.parentElement.parentElement.classList.contains('bground')){
+        deleteErrorMessages();
+      }
   }
-  
 });
 
 // ================== Implémenter entrées du formulaire #2 ============
@@ -119,7 +127,7 @@ function isAnyRadioChecked(){
 }
 
 // create div with red error
-function createDivWithError(elem, errorText){
+const createDivWithError = (elem, errorText) => {
   var newDiv = document.createElement("div");
   newDiv.classList.add('error');
   newDiv.innerHTML = errorText;
@@ -127,7 +135,7 @@ function createDivWithError(elem, errorText){
 }
 
 // vérification du contenu du champ
-function isValid(field){
+const isValid = field => {
   let elem = document.querySelector('input[name="'+ field.fieldName +'"]');
   if(!field.regExp.test(elem.value)  // for 'normal' inputs
       || (field.fieldName === 'checkbox1' && !elem.checked)   // for checkbox
@@ -151,8 +159,6 @@ fieldsArr.forEach(i => {
 
 
 //  submit form
-
-
 document.querySelector('form').addEventListener('submit', function(e){
   e.preventDefault();
   e.stopPropagation();
@@ -168,17 +174,12 @@ document.querySelector('form').addEventListener('submit', function(e){
   });
 
   if(isError){
-    alert('Remplissez les champs obligatoires et corrigez les erreurs');
+    // alert('Remplissez les champs obligatoires et corrigez les erreurs');
+    openModal(errorMsg);
   }else{
-
     closeModal(modalbg);
-    openModal(document.querySelector('.success'));
-    
-    // modalbg.style.removeProperty('display');
-    // document.querySelector('.success').style.display = "block";
-    // here we can use submit or ajax
-    //  this.submit();
-
+    openModal(successMsg);
+    clearFields();
   }
   
 })

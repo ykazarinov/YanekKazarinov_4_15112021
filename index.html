@@ -55,7 +55,7 @@
         </button>
       </div>
 
-    <!-- Success message-->
+<!-- Success message-->
     <div class="success noDisplay">
       <div class="success__content">
         <span class="close--success close"></span>
@@ -64,17 +64,28 @@
       </div>
     </div>
 
+<!-- Error message-->
+    <div class="errorModal noDisplay">
+      <div class="errorModal__content">
+        <span class="close--errorModal close"></span>
+        <i class="fas fa-exclamation-circle"></i>
+        <span>Il y a des erreurs dans le formulaire. Données non envoyées !</span>
+      </div>
+    </div>
+
 <!-- Modal -->
 
       <div class="bground noDisplay">
         <div class="content">
+          <span class="clear"><i class="fas fa-broom"></i></span>
+          <span class="fill"><i class="fas fa-file-signature"></i></span>
           <span class="close"></span>
           <div class="modal-body">
             <form
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              
             >
               <div
                 class="formData">
