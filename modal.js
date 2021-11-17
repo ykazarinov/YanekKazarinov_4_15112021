@@ -20,20 +20,70 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = "block";
+  // modalbg.style.display = "block";
+  openModal(modalbg);
   
  
 }
 
+// ================== Data pour test ==================================
+class testData{
+  constructor(fieldName, data, type){
+    this.fieldName = fieldName;
+    this.data = data;
+    this.type = type;
+  }
+}
+
+let testDataArr = [];
+
+testDataArr[0] = new testData('first', 'Yanek', 'normal');
+testDataArr[1] = new testData('last', 'Kazarinov', 'normal');
+testDataArr[2] = new testData('email', 'kazarinov.yanek@gmail.com', 'normal');
+testDataArr[3] = new testData('birthdate', '1982-09-21', 'normal');
+testDataArr[4] = new testData('quantity', 1, 'normal');
+testDataArr[5] = new testData('location', [true, 2], 'radio');
+testDataArr[6] = new testData('checkbox1', true, 'check');
+
+testDataArr.forEach(i => {
+  switch (i.type){ 
+    case 'normal' : 
+      document.querySelector('input[name = "'+ i.fieldName +'"]').value = i.data;
+      break;
+    case 'radio' : 
+      document.querySelector('input[name = "'+ i.fieldName +'"]:nth-of-type('+ i.data[1] +')').checked = i.data[0];
+      break;
+    case 'check' : 
+      document.querySelector('input[name = "'+ i.fieldName +'"]').checked = i.data;
+      break;
+  }
+
+});
+
+
 // ================== TODO : fermer la modale #1 ======================
 
-const closeBtn = document.querySelector('.close');
-// close modal event
-closeBtn.addEventListener('click', closeModal);
-// close modal form
-function closeModal(){
-  modalbg.style.removeProperty('display');
+function openModal(elem){
+  elem.classList.remove('noDisplay');
+  elem.classList.remove('modal_close');
+  elem.classList.add('modal_open');
 }
+
+function closeModal(elem){
+  elem.classList.add('modal_close');
+  elem.classList.remove('modal_open');
+  // elem.classList.add('noDisplay');
+}
+
+document.addEventListener('click',e => {
+  
+  if(e.target.classList.contains('close')){
+      // e.target.parentElement.parentElement.classList.add('modal_close');
+      // e.target.parentElement.parentElement.style.removeProperty('display');
+      closeModal(e.target.parentElement.parentElement);
+  }
+  
+});
 
 // ================== Implémenter entrées du formulaire #2 ============
 class field{
@@ -47,12 +97,13 @@ class field{
 
 let fieldsArr = [];
 
-fieldsArr[0] = new field('first', /[a-z,A-Z]{2,}$/, 'Au moins 2 lettres', true);
-fieldsArr[1] = new field('last', /[a-z,A-Z]{2,}$/, 'Au moins 2 lettres', true);
+fieldsArr[0] = new field('first', /[a-z,A-Z]{2,}$/, 'Veuillez entrer 2 caractères ou plus pour le champ du prenom.', true);
+fieldsArr[1] = new field('last', /[a-z,A-Z]{2,}$/, 'Veuillez entrer 2 caractères ou plus pour le champ du nom.', true);
 fieldsArr[3] = new field('email', /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u, 'Veuillez entrer un email valide', true);
 fieldsArr[4] = new field('quantity', /[0-9]$/, 'Entrez le numéro', true);
-fieldsArr[5] = new field('checkbox1', /[a-z]/, 'Champs requis', true);
-fieldsArr[6] = new field('location', /[a-z]/, 'Sélectionnez une ville', true);
+fieldsArr[5] = new field('checkbox1', /[a-z]/, 'Vous devez vérifier que vous acceptez les termes et conditions.', true);
+fieldsArr[6] = new field('location', /[a-z]/, 'Vous devez choisir une option.', true);
+fieldsArr[7] = new field('birthdate', /[0-9]$/, 'Vous devez entrer votre date de naissance.', true);
 
 // delete all errorMessages
 function deleteErrorMessages(){
@@ -100,8 +151,11 @@ fieldsArr.forEach(i => {
 
 
 //  submit form
+
+
 document.querySelector('form').addEventListener('submit', function(e){
   e.preventDefault();
+  e.stopPropagation();
   deleteErrorMessages();
 
   let isError;
@@ -116,11 +170,16 @@ document.querySelector('form').addEventListener('submit', function(e){
   if(isError){
     alert('Remplissez les champs obligatoires et corrigez les erreurs');
   }else{
-    this.submit();
+
+    closeModal(modalbg);
+    openModal(document.querySelector('.success'));
+    
+    // modalbg.style.removeProperty('display');
+    // document.querySelector('.success').style.display = "block";
+    // here we can use submit or ajax
+    //  this.submit();
+
   }
   
 })
-
-
-
 

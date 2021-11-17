@@ -5,7 +5,8 @@
     <title>Reservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="modal.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--FontAweSome-->
+    <script src="https://kit.fontawesome.com/9660196032.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans"
       rel="stylesheet"
@@ -29,7 +30,9 @@
     </div>
     </div>
   </div>
-    <main>
+
+    <main> 
+
       <div class="hero-section">
         <div class="hero-content">
           <h1 class="hero-headline">
@@ -52,9 +55,18 @@
         </button>
       </div>
 
+    <!-- Success message-->
+    <div class="success noDisplay">
+      <div class="success__content">
+        <span class="close--success close"></span>
+        <i class="fas fa-check-circle"></i>
+        <span>Merci ! Votre réservation a été reçue.</span>
+      </div>
+    </div>
+
 <!-- Modal -->
 
-      <div class="bground">
+      <div class="bground noDisplay">
         <div class="content">
           <span class="close"></span>
           <div class="modal-body">
