@@ -7,6 +7,10 @@ function editNav() {
   }
 }
 
+document.getElementById('menuIcon').addEventListener('click', function(e){
+  editNav();
+});
+
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
