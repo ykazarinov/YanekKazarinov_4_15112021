@@ -89,7 +89,7 @@ const closeModal = elem => {
 }
 
 document.addEventListener('click',e => {
-  if(e.target.classList.contains('close')){
+  if(e.target.classList.contains('close') || e.target.classList.contains('close-btn')){
       closeModal(e.target.parentElement.parentElement);
       if(e.target.parentElement.parentElement.classList.contains('bground')){
         deleteErrorMessages();
@@ -123,6 +123,11 @@ function deleteErrorMessages(){
     while(errorElements[0]) {
         errorElements[0].parentNode.removeChild(errorElements[0]);
     }
+    let errorInputElements = document.getElementsByClassName('inputError');
+    while(errorInputElements[0]) {
+      errorInputElements[0].classList.remove('inputError');
+    }
+    
 }
 
 // verification for radio
@@ -136,6 +141,7 @@ const createDivWithError = (elem, errorText) => {
   newDiv.classList.add('error');
   newDiv.innerHTML = errorText;
   elem.parentElement.insertBefore(newDiv, elem.nextSibling);
+  elem.classList.add('inputError');
 }
 
 // vérification du contenu du champ

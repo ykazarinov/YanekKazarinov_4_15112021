@@ -64,6 +64,13 @@ img {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+  
+}
+
+.topnav a.active span, .topnav a:hover span{
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-bottom: solid 1px #fff;
 }
 
 .topnav .icon {
@@ -73,18 +80,40 @@ img {
 
 @media screen and (max-width: 1024px) {
 
+  .topnav a.active span, .topnav a:hover span{
+    border-bottom: none;
+  }
+
+  .header-logo img{
+    height: 20px;
+  }
+
+.topnav{
+margin-top: 40px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.hero-content{
+  margin-top: 0;
+}
+
+/* .hero-text{
+  
+} */
+
   .topnav .icon {
     
     display: flex;
     position: absolute;
     right: 0.5rem;
-    top: 0.5rem;
+    top: 0.4rem;
     width: 2.5rem;
     height: 2.5rem;
     align-items: center;
     justify-content: center;
-    font-size: 1.7rem;
-    color: #000;
+    font-size: 1.3rem;
+    color: #ff0000;
     z-index: 2;
   }
 
@@ -127,6 +156,10 @@ img {
 
 @media screen and (max-width: 1024px) {
 
+  .topnav.responsive .icon {
+    color: #fff;
+  }
+
   .topnav.responsive a {
     width: calc(100% - 10px);
     /* opacity: 1; */
@@ -152,7 +185,7 @@ img {
   .main-navbar{
     position: absolute;
     z-index: 2;
-    right: 2rem;
+    right: 1rem;
     background-color: #fff;
     border-radius: 20px;
   }
@@ -160,7 +193,7 @@ img {
   .topnav .main-navbar{
     width: 2.5rem;
     /* min-height: 50px; */
-
+    top: 27px;
     transition: all .2s .2s ease-in-out;
     box-shadow: none;
   }
@@ -285,6 +318,11 @@ input {
   border-radius: 8px;
   font-size: 20px;
   height: 48px;
+
+}
+
+.formData{
+  margin-bottom: 10px;
 }
 .formData[data-error]::after {
   content: attr(data-error);
@@ -395,12 +433,12 @@ input[data-error]::after {
 }
 .close.close--success:before,
 .close.close--success:after{
-  background-color: darkgreen;
+  background-color: #fff;
 }
 
 .close.close--errorModal:before,
 .close.close--errorModal:after{
-  background-color: darkred;
+  background-color: #fff;
 }
 .close:before {
   transform: rotate(45deg);
@@ -570,6 +608,7 @@ footer {
   .hero-section {
     display: block;
     box-shadow: unset;
+    min-height: unset;
   }
   .hero-content {
     background: #fff;
@@ -588,11 +627,11 @@ footer {
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
   }
   .hero-img img {
     border-radius: 10px;
-    margin-top: 40px;
+    /* margin-top: 40px; */
   }
   .hero-section > .btn-signup {
     display: block;
@@ -600,12 +639,74 @@ footer {
     padding: 12px 35px;
   }
   .copyrights {
-    margin-top: 50px;
+    margin-top: 0;
     text-align: center;
+    font-size: 0.7rem;
   }
 }
 
+
+.success, .errorModal{
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 39, 156, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success__content, .errorModal__content{
+  background: #232323;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  min-height: 250px;
+
+  z-index: 4;
+  min-height: 300px; 
+  width: 75%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  font-size: 1.5rem;
+
+}
+
+.close-btn{
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 540px) {
+
+  .success, .errorModal{
+    background-color: transparent;
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 79px);
+    top: 79px;
+  }
+
+  .success__content, .errorModal__content{
+    top: 79px;
+    width: 100%;
+    min-height: calc(100vh - 79px);
+    
+    
+  }
+.bground{
+  background-color: transparent;
+}
+
+  .content{
+    margin-top: 79px;
+  }
   .topnav.responsive .main-navbar{
     width: 80%;
   }
@@ -617,7 +718,7 @@ footer {
   }
 
   .hero-headline{
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     text-align: center;
   }
 
@@ -655,34 +756,15 @@ footer {
 
 .error{
   color: #f00;
-  font-size: 1rem;
+  font-size: 0.6rem;
+}
+
+.inputError{
+  border: solid 2px #f00;
 }
 
 
-.success, .errorModal{
-  border-radius: 10px;
 
- 
-  font-weight: bold;
-  text-align: center;
-  width: 75%;
-  left: 12.5%;
-  top: 25vh;
-  height: 250px;
-  margin-bottom: 1rem;
-  position: absolute;
-  z-index: 4;
-}
-
-.success{
-  color: darkgreen;
-  background-color:lightgreen;
-}
-
-.errorModal{
-  color: darkred;
-  background-color: lightcoral;
-}
 
 .noDisplay{
   display: none;
@@ -702,20 +784,12 @@ footer {
     
 }
 
-.success__content,
-.errorModal__content{
-  margin-left: 1rem;
-  margin-right: 1rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
+/*  */
 .success i,
 .errorModal i{
   font-size: 2rem;
-  padding-right: 1rem;
+  
+  margin-bottom: 2rem;
 }
 
 .clear{

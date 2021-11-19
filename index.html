@@ -13,6 +13,33 @@
     />
   </head>
   <body>
+
+<!-- Success message-->
+<div class="success noDisplay">
+  <div class="success__content">
+    <span class="close--success close"></span>
+    <i class="fas fa-check-circle"></i>
+    <span>Merci ! Votre réservation a été reçue.</span>
+    <button class="btn-signup close-btn">
+      fermer
+    </button>
+  </div>
+  
+</div>
+
+<!-- Error message-->
+<div class="errorModal noDisplay">
+  <div class="errorModal__content">
+    <span class="close--errorModal close"></span>
+    <i class="fas fa-exclamation-circle"></i>
+    <span>Il y a des erreurs dans le formulaire. Données non envoyées !</span>
+    <button class="btn-signup close-btn">
+      fermer
+    </button>
+  </div>
+</div>
+
+
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
       <img alt="logo" src="Logo.png" width="auto" height="auto" />
@@ -57,23 +84,7 @@
         </button>
       </div>
 
-<!-- Success message-->
-    <div class="success noDisplay">
-      <div class="success__content">
-        <span class="close--success close"></span>
-        <i class="fas fa-check-circle"></i>
-        <span>Merci ! Votre réservation a été reçue.</span>
-      </div>
-    </div>
 
-<!-- Error message-->
-    <div class="errorModal noDisplay">
-      <div class="errorModal__content">
-        <span class="close--errorModal close"></span>
-        <i class="fas fa-exclamation-circle"></i>
-        <span>Il y a des erreurs dans le formulaire. Données non envoyées !</span>
-      </div>
-    </div>
 
 <!-- Modal -->
 
@@ -91,46 +102,46 @@
             >
               <div
                 class="formData">
-                <label for="first">Prénom</label><br>
+                <label for="first">Prénom</label>
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
 
-                /><br>
+                />
               </div>
               <div
                 class="formData">
-                <label for="last">Nom</label><br>
+                <label for="last">Nom</label>
                 <input
                   class="text-control"
                   type="text"
                   id="last"
                   name="last"
                  
-                /><br>
+                />
               </div>
               <div
                 class="formData">
-                <label for="email">E-mail</label><br>
+                <label for="email">E-mail</label>
                 <input
                   class="text-control"
                   type="text"
                   id="email"
                   name="email"
                 
-                /><br>
+                />
               </div>
               <div
                 class="formData">
-                <label for="birthdate">Date de naissance</label><br>
+                <label for="birthdate">Date de naissance</label>
                 <input
                   class="text-control"
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                /><br>
+                />
               </div>
               <div
                 class="formData">
