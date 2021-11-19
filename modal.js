@@ -115,7 +115,8 @@ fieldsArr[3] = new field('email', /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{
 fieldsArr[4] = new field('quantity', /[0-9]$/, 'Entrez le numéro', true);
 fieldsArr[5] = new field('checkbox1', /[a-z]/, 'Vous devez vérifier que vous acceptez les termes et conditions.', true);
 fieldsArr[6] = new field('location', /[a-z]/, 'Vous devez choisir une option.', true);
-fieldsArr[7] = new field('birthdate', /[0-9]$/, 'Vous devez entrer votre date de naissance.', true);
+// fieldsArr[7] = new field('birthdate', /^([0-9]{2})(\/|-|\.)?([0-9]{2})(\/|-|\.)?([0-9]{4})$/, 'Vous devez entrer votre date de naissance.', true);
+fieldsArr[7] = new field('birthdate', /[0-9\/|-|\.]$/, 'Vous devez entrer votre date de naissance.', true);
 
 // delete all errorMessages
 function deleteErrorMessages(){

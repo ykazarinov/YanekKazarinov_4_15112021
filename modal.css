@@ -19,6 +19,7 @@ body {
   font-size: 18px;
   max-width: 1300px;
   margin: 0 auto;
+  background-color: #fff;
 }
 
 p {
@@ -36,6 +37,11 @@ img {
 }
 .header-logo {
     float: left;
+}
+
+.header-logo img{
+  width: auto;
+  height: auto;
 }
 .main-navbar {
     float: right;
@@ -676,6 +682,7 @@ footer {
   justify-content: space-evenly;
   flex-direction: column;
   font-size: 1.5rem;
+  position: relative;
 
 }
 
@@ -694,7 +701,7 @@ footer {
   }
 
   .success__content, .errorModal__content{
-    top: 79px;
+    top: 0;
     width: 100%;
     min-height: calc(100vh - 79px);
     
