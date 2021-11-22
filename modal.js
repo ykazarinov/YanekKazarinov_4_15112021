@@ -20,12 +20,8 @@ const errorMsg = document.querySelector('.errorModal');
 
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalBtn.forEach((btn) => btn.addEventListener("click", function() {openModal(modalbg)}));
 
-// launch modal form
-function launchModal() {
-  openModal(modalbg);
-}
 
 // ================== Remplir avec les données de test ==========================
 class testData{
@@ -172,7 +168,7 @@ fieldsArr.forEach(i => {
 //  submit form
 document.querySelector('form').addEventListener('submit', function(e){
   e.preventDefault();
-  e.stopPropagation();
+  // e.stopPropagation();
   deleteErrorMessages();
 
   let isError;
